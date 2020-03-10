@@ -1,1 +1,1 @@
-# covid-19-reactnative
+# CoronaVirus Info
