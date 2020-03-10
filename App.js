@@ -9,7 +9,6 @@ import {
   Image,
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import ExtraDimensions from 'react-native-extra-dimensions-android';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import { mapStyle } from './mapStyle';
@@ -40,7 +39,7 @@ const App = () => {
     setDetail(item);
     setTimeout(() => {
       refRBSheet.current.open();
-    }, 500);
+    }, 0);
   };
 
   const formatDate = () => {
@@ -133,8 +132,7 @@ const App = () => {
             key={idx}
             tracksViewChanges={false}
             coordinate={{ latitude: item.lat, longitude: item.long }}
-            onPress={openBottomSheet(item)}
-            flat>
+            onPress={openBottomSheet(item)}>
             <Image
               source={require('./assets/marker.png')}
               style={styles.marker}
@@ -150,7 +148,7 @@ const App = () => {
 const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
-    height: ExtraDimensions.get('REAL_WINDOW_HEIGHT'),
+    height: '100%',
   },
   countryName: {
     color: '#bdc3c7',
