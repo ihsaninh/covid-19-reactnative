@@ -1,6 +1,13 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { View, StyleSheet, Dimensions, StatusBar, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  StatusBar,
+  Text,
+  Image,
+} from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import ExtraDimensions from 'react-native-extra-dimensions-android';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -31,7 +38,9 @@ const App = () => {
 
   const openBottomSheet = item => () => {
     setDetail(item);
-    refRBSheet.current.open();
+    setTimeout(() => {
+      refRBSheet.current.open();
+    }, 500);
   };
 
   const formatDate = () => {
@@ -43,18 +52,18 @@ const App = () => {
     let getMinutes = date.getMinutes();
 
     const monthName = [
-      'Januari',
-      'February',
-      'March',
-      'April',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
       'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
 
     if (getHours < 10) {
@@ -116,19 +125,21 @@ const App = () => {
           latitudeDelta: 0.015,
           longitudeDelta: 0.0121,
         }}
-        showsCompass
         customMapStyle={mapStyle}
         onMapReady={onMapReady}
-        maxZoomLevel={4.5}
-        showsScale>
+        maxZoomLevel={4.9}>
         {data.map((item, idx) => (
           <Marker
             key={idx}
-            image={require('./assets/marker.png')}
             coordinate={{ latitude: item.lat, longitude: item.long }}
             onPress={openBottomSheet(item)}
-            flat
-          />
+            flat>
+            <Image
+              source={require('./assets/marker.png')}
+              style={styles.marker}
+              resizeMode="contain"
+            />
+          </Marker>
         ))}
       </MapView>
       {renderBottomSheet()}
@@ -166,6 +177,10 @@ const styles = StyleSheet.create({
   },
   recovered: {
     color: 'lightgreen',
+  },
+  marker: {
+    width: 25,
+    height: 25,
   },
 });
 
