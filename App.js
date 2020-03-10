@@ -131,13 +131,13 @@ const App = () => {
         {data.map((item, idx) => (
           <Marker
             key={idx}
+            tracksViewChanges={false}
             coordinate={{ latitude: item.lat, longitude: item.long }}
             onPress={openBottomSheet(item)}
             flat>
             <Image
               source={require('./assets/marker.png')}
               style={styles.marker}
-              resizeMode="contain"
             />
           </Marker>
         ))}
