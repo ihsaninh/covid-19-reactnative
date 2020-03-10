@@ -1,4 +1,4 @@
-package com.rnmaps;
+package com.covid19.app;
 
 import android.app.Application;
 import android.content.Context;

@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "rnMaps-tvOS.app"
-               BlueprintName = "rnMaps-tvOS"
-               ReferencedContainer = "container:rnMaps.xcodeproj">
+               BuildableName = "CoronaVirus-tvOS.app"
+               BlueprintName = "CoronaVirus-tvOS"
+               ReferencedContainer = "container:CoronaVirus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "rnMaps-tvOSTests.xctest"
-               BlueprintName = "rnMaps-tvOSTests"
-               ReferencedContainer = "container:rnMaps.xcodeproj">
+               BuildableName = "CoronaVirus-tvOSTests.xctest"
+               BlueprintName = "CoronaVirus-tvOSTests"
+               ReferencedContainer = "container:CoronaVirus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "rnMaps-tvOSTests.xctest"
-               BlueprintName = "rnMaps-tvOSTests"
-               ReferencedContainer = "container:rnMaps.xcodeproj">
+               BuildableName = "CoronaVirus-tvOSTests.xctest"
+               BlueprintName = "CoronaVirus-tvOSTests"
+               ReferencedContainer = "container:CoronaVirus.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "rnMaps-tvOS.app"
-            BlueprintName = "rnMaps-tvOS"
-            ReferencedContainer = "container:rnMaps.xcodeproj">
+            BuildableName = "CoronaVirus-tvOS.app"
+            BlueprintName = "CoronaVirus-tvOS"
+            ReferencedContainer = "container:CoronaVirus.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "rnMaps-tvOS.app"
-            BlueprintName = "rnMaps-tvOS"
-            ReferencedContainer = "container:rnMaps.xcodeproj">
+            BuildableName = "CoronaVirus-tvOS.app"
+            BlueprintName = "CoronaVirus-tvOS"
+            ReferencedContainer = "container:CoronaVirus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "rnMaps-tvOS.app"
-            BlueprintName = "rnMaps-tvOS"
-            ReferencedContainer = "container:rnMaps.xcodeproj">
+            BuildableName = "CoronaVirus-tvOS.app"
+            BlueprintName = "CoronaVirus-tvOS"
+            ReferencedContainer = "container:CoronaVirus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

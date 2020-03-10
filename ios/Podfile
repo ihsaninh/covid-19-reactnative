@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'rnMaps' do
-  # Pods for rnMaps
+target 'CoronaVirus' do
+  # Pods for CoronaVirus
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,7 +34,7 @@ target 'rnMaps' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'rnMapsTests' do
+  target 'CoronaVirusTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +42,10 @@ target 'rnMaps' do
   use_native_modules!
 end
 
-target 'rnMaps-tvOS' do
-  # Pods for rnMaps-tvOS
+target 'CoronaVirus-tvOS' do
+  # Pods for CoronaVirus-tvOS
 
-  target 'rnMaps-tvOSTests' do
+  target 'CoronaVirus-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
