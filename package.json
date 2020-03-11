@@ -10,18 +10,23 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@bankify/react-native-animate-number": "^0.2.1",
     "@mapbox/polyline": "^1.1.0",
     "@react-native-community/geolocation": "^2.0.2",
-    "axios": "^0.19.2",
+    "@react-native-community/masked-view": "^0.1.7",
+    "@react-navigation/native": "^5.0.9",
+    "@react-navigation/stack": "^5.1.1",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-extra-dimensions-android": "git+https://github.com/ihsaninh/react-native-extra-dimensions-android",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-maps": "0.26.1",
-    "react-native-modal": "^11.5.4",
+    "react-native-pie-chart": "^1.0.13",
     "react-native-raw-bottom-sheet": "^2.0.6",
     "react-native-reanimated": "^1.7.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.19"
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "^2.2.0",
+    "react-native-svg": "^12.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
