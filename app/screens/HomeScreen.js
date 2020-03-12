@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
 import PieChart from 'react-native-pie-chart';
 import ExtraDimensions from 'react-native-extra-dimensions-android';
 
@@ -41,8 +47,8 @@ const HomeScreen = ({ navigation }) => {
       </View>
     );
   };
-  const renderChart = () => {
-    const chart_wh = 200;
+  const renderDataChart = () => {
+    const chart_wh = 190;
     const series = data;
     const sliceColor = ['#E7B002', '#01C292', '#e74c3c'];
     return (
@@ -85,7 +91,12 @@ const HomeScreen = ({ navigation }) => {
           Last Updated: {formatDate(lastUpdate)}
         </Text>
         <Text style={styles.infoSource}>
-          Source data: https://covid19.mathdro.id/api
+          Source data:{' '}
+          <Text
+            style={styles.link}
+            onPress={() => Linking.openURL('https://covid19.mathdro.id/api')}>
+            https://covid19.mathdro.id/api
+          </Text>
         </Text>
       </View>
     );
@@ -104,7 +115,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {renderTitle()}
-      {renderChart()}
+      {renderDataChart()}
       {renderDailyCases()}
     </View>
   );
@@ -160,6 +171,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     color: '#adadad',
     fontFamily: 'GoogleSans-Regular',
+  },
+  link: {
+    textDecorationLine: 'underline',
   },
   sections: {
     paddingBottom: 15,
