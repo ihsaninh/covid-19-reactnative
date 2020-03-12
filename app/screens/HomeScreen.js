@@ -3,8 +3,11 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 import ExtraDimensions from 'react-native-extra-dimensions-android';
 
+import { formatDate, currencyFormatter } from '../utils/helper';
+
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = React.useState([]);
+  const [lastUpdate, setLastUpdate] = React.useState('');
 
   React.useEffect(() => {
     getData();
@@ -19,6 +22,7 @@ const HomeScreen = ({ navigation }) => {
       const deaths = result.deaths.value;
       const arrayData = [confirmed, recovered, deaths];
       setData(arrayData);
+      setLastUpdate(result.lastUpdate);
     } catch (error) {
       // error handler
     }
@@ -26,13 +30,6 @@ const HomeScreen = ({ navigation }) => {
 
   const goToMaps = () => {
     return navigation.navigate('Maps');
-  };
-
-  const currencyFormatter = num => {
-    if (num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-    return num;
   };
 
   const renderTitle = () => {
@@ -47,37 +44,49 @@ const HomeScreen = ({ navigation }) => {
   const renderChart = () => {
     const chart_wh = 200;
     const series = data;
-    const sliceColor = ['#E7B002', '#01C292', 'red'];
+    const sliceColor = ['#E7B002', '#01C292', '#e74c3c'];
     return (
-      <View style={[styles.card, styles.flexRow]}>
-        <PieChart
-          chart_wh={chart_wh}
-          series={series}
-          sliceColor={sliceColor}
-          doughnut={true}
-          coverRadius={0.65}
-          coverFill={'#1B232E'}
-        />
-        <View style={styles.info}>
-          <View style={styles.sections}>
-            <Text style={[styles.textWhite, styles.fontStyle]}>
-              {currencyFormatter(data[0])}
-            </Text>
-            <Text style={[styles.confirmed, styles.fontStyle]}>Confirmed</Text>
-          </View>
-          <View style={styles.sections}>
-            <Text style={[styles.textWhite, styles.fontStyle]}>
-              {currencyFormatter(data[1])}
-            </Text>
-            <Text style={[styles.recovered, styles.fontStyle]}>Recovered</Text>
-          </View>
-          <View style={styles.sections}>
-            <Text style={[styles.textWhite, styles.fontStyle]}>
-              {currencyFormatter(data[2])}
-            </Text>
-            <Text style={[styles.deaths, styles.fontStyle]}>Deaths</Text>
+      <View style={styles.card}>
+        <View style={styles.flexRow}>
+          <PieChart
+            chart_wh={chart_wh}
+            series={series}
+            sliceColor={sliceColor}
+            doughnut={true}
+            coverRadius={0.65}
+            coverFill={'#1B232E'}
+          />
+          <View style={styles.info}>
+            <View style={styles.sections}>
+              <Text style={[styles.textWhite, styles.fontStyle]}>
+                {currencyFormatter(data[0])}
+              </Text>
+              <Text style={[styles.confirmed, styles.fontStyle]}>
+                Confirmed
+              </Text>
+            </View>
+            <View style={styles.sections}>
+              <Text style={[styles.textWhite, styles.fontStyle]}>
+                {currencyFormatter(data[1])}
+              </Text>
+              <Text style={[styles.recovered, styles.fontStyle]}>
+                Recovered
+              </Text>
+            </View>
+            <View style={styles.sections}>
+              <Text style={[styles.textWhite, styles.fontStyle]}>
+                {currencyFormatter(data[2])}
+              </Text>
+              <Text style={[styles.deaths, styles.fontStyle]}>Deaths</Text>
+            </View>
           </View>
         </View>
+        <Text style={styles.infoData}>
+          Last Updated: {formatDate(lastUpdate)}
+        </Text>
+        <Text style={styles.infoSource}>
+          Source data: https://covid19.mathdro.id/api
+        </Text>
       </View>
     );
   };
@@ -142,6 +151,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 20,
   },
+  infoData: {
+    paddingTop: 30,
+    color: '#adadad',
+    fontFamily: 'GoogleSans-Medium',
+  },
+  infoSource: {
+    paddingTop: 10,
+    color: '#adadad',
+    fontFamily: 'GoogleSans-Regular',
+  },
   sections: {
     paddingBottom: 15,
   },
@@ -162,6 +181,6 @@ const styles = StyleSheet.create({
     color: '#01C292',
   },
   deaths: {
-    color: 'red',
+    color: '#e74c3c',
   },
 });

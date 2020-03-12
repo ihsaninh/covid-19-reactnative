@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
+import { formatDate } from '../utils/helper';
 import { mapStyle } from '../../mapStyle';
 
 const MapsScreens = () => {
@@ -32,42 +33,6 @@ const MapsScreens = () => {
     setTimeout(() => {
       refRBSheet.current.open();
     }, 0);
-  };
-
-  const formatDate = () => {
-    const date = new Date(detail.lastUpdate);
-    const month = date.getMonth();
-    const getDate = date.getDate();
-    const getYears = date.getFullYear();
-    let getHours = date.getHours();
-    let getMinutes = date.getMinutes();
-
-    const monthName = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    if (getHours < 10) {
-      getHours = `0${getHours}`;
-    }
-
-    if (getMinutes < 10) {
-      getMinutes = `0${getMinutes}`;
-    }
-
-    return `${getDate} ${
-      monthName[month]
-    } ${getYears} ${getHours}:${getMinutes}`;
   };
 
   const renderBottomSheet = () => {
@@ -105,7 +70,9 @@ const MapsScreens = () => {
             ]}>{`Existing: ${detail.confirmed -
             detail.recovered -
             detail.deaths}`}</Text>
-          <Text style={styles.lastUpdate}>Last Updated: {formatDate()}</Text>
+          <Text style={styles.lastUpdate}>
+            Last Updated: {formatDate(detail.lastUpdate)}
+          </Text>
         </View>
       </RBSheet>
     );
