@@ -101,7 +101,7 @@ const MapsScreens = () => {
             onPress={openBottomSheet(item)}>
             <Image
               source={require('../../assets/marker.png')}
-              style={styles.marker}
+              style={styles.markerIcon}
             />
           </Marker>
         ))}
@@ -150,9 +150,9 @@ const styles = StyleSheet.create({
     color: 'orange',
     fontFamily: 'GoogleSans-Medium',
   },
-  marker: {
-    width: 25,
-    height: 25,
+  markerIcon: {
+    height: 20,
+    width: 20,
   },
 });
 
