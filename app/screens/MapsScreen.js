@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
-import { formatDate } from '../utils/helper';
+import { formatDate, currencyFormatter } from '../utils/helper';
 import { mapStyle } from '../../mapStyle';
 
 const MapsScreens = () => {
@@ -32,7 +32,7 @@ const MapsScreens = () => {
     setDetail(item);
     setTimeout(() => {
       refRBSheet.current.open();
-    }, 0);
+    }, 200);
   };
 
   const renderBottomSheet = () => {
@@ -41,6 +41,7 @@ const MapsScreens = () => {
         ref={refRBSheet}
         closeOnDragDown={true}
         height={220}
+        duration={250}
         closeOnPressMask={true}
         customStyles={{
           container: {
@@ -54,22 +55,28 @@ const MapsScreens = () => {
           <Text style={styles.countryName}>{`${
             detail.provinceState ? detail.provinceState + ' ' : ''
           }${detail.countryRegion}`}</Text>
-          <Text style={[styles.countryInfo, styles.confirmed]}>{`Confirmed: ${
-            detail.confirmed
-          }`}</Text>
-          <Text style={[styles.countryInfo, styles.deaths]}>{`Deaths: ${
-            detail.deaths
-          }`}</Text>
-          <Text style={[styles.countryInfo, styles.recovered]}>{`Recovered: ${
-            detail.recovered
-          }`}</Text>
+          <Text
+            style={[
+              styles.countryInfo,
+              styles.confirmed,
+            ]}>{`Confirmed: ${currencyFormatter(detail.confirmed)}`}</Text>
+          <Text
+            style={[
+              styles.countryInfo,
+              styles.deaths,
+            ]}>{`Deaths: ${currencyFormatter(detail.deaths)}`}</Text>
+          <Text
+            style={[
+              styles.countryInfo,
+              styles.recovered,
+            ]}>{`Recovered: ${currencyFormatter(detail.recovered)}`}</Text>
           <Text
             style={[
               styles.countryInfo,
               styles.existing,
-            ]}>{`Existing: ${detail.confirmed -
-            detail.recovered -
-            detail.deaths}`}</Text>
+            ]}>{`Existing: ${currencyFormatter(
+            detail.confirmed - detail.recovered - detail.deaths,
+          )}`}</Text>
           <Text style={styles.lastUpdate}>
             Last Updated: {formatDate(detail.lastUpdate)}
           </Text>
