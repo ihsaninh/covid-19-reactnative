@@ -29,13 +29,14 @@ const Styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     backgroundColor: '#1B232E',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   card2: {
-    marginTop: 2,
+    marginTop: 5,
     padding: 20,
     paddingLeft: 25,
     backgroundColor: '#1B232E',
+    borderRadius: 10,
   },
   info: {
     flexDirection: 'column',
@@ -86,7 +87,7 @@ const Styles = StyleSheet.create({
   },
   dataContainer: {
     marginTop: 10,
-    width: '95%',
+    width: '92%',
   },
   dataCount: {
     fontSize: 14,
