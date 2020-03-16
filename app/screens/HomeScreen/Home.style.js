@@ -29,10 +29,12 @@ const Styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     backgroundColor: '#1B232E',
+    marginBottom: 20,
   },
   card2: {
-    marginTop: 20,
+    marginTop: 2,
     padding: 20,
+    paddingLeft: 25,
     backgroundColor: '#1B232E',
   },
   info: {
@@ -74,6 +76,28 @@ const Styles = StyleSheet.create({
   },
   deaths: {
     color: '#e74c3c',
+  },
+  spaceBetween: {
+    justifyContent: 'space-between',
+  },
+  infoDate: {
+    fontSize: 15,
+    fontFamily: 'GoogleSans-Medium',
+  },
+  dataContainer: {
+    marginTop: 10,
+    width: '95%',
+  },
+  dataCount: {
+    fontSize: 14,
+    fontFamily: 'GoogleSans-Medium',
+  },
+  report: {
+    paddingTop: 10,
+    color: '#7F8FA6',
+    width: '95%',
+    lineHeight: 20,
+    fontFamily: 'GoogleSans-Regular',
   },
 });
 

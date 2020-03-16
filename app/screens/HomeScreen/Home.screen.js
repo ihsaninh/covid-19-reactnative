@@ -1,16 +1,23 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Linking } from 'react-native';
+import { Text, View, TouchableOpacity, Linking, FlatList } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
 import { Styles } from './Home.style';
-import { formatDate, currencyFormatter } from '../../utils/helper';
+import {
+  formatDate,
+  currencyFormatter,
+  compare,
+  formatOnlyDate,
+} from '../../utils/helper';
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = React.useState([]);
+  const [dailyData, setDailyData] = React.useState([]);
   const [lastUpdate, setLastUpdate] = React.useState('');
 
   React.useEffect(() => {
     getData();
+    getDataDailyCases();
   }, []);
 
   const getData = async () => {
@@ -26,6 +33,14 @@ const HomeScreen = ({ navigation }) => {
     } catch (error) {
       // error handler
     }
+  };
+
+  const getDataDailyCases = async () => {
+    try {
+      const response = await fetch('https://covid19.mathdro.id/api/daily');
+      const result = await response.json();
+      setDailyData(result.sort(compare));
+    } catch (error) {}
   };
 
   const goToMaps = () => {
@@ -96,7 +111,7 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
-  const renderDailyCases = () => {
+  const renderGoToMaps = () => {
     return (
       <View style={Styles.card2}>
         <TouchableOpacity onPress={goToMaps}>
@@ -106,11 +121,45 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
+  const renderDailyCase = ({ item }) => {
+    return (
+      <View style={Styles.card2}>
+        <Text style={[Styles.textWhite, Styles.infoDate]}>
+          {formatOnlyDate(item.reportDate)}
+        </Text>
+        <View
+          style={[Styles.flexRow, Styles.spaceBetween, Styles.dataContainer]}>
+          <Text style={[Styles.confirmed, Styles.dataCount]}>
+            Confirmed: {currencyFormatter(item.deltaConfirmed)}
+          </Text>
+          <Text style={[Styles.recovered, Styles.dataCount]}>
+            Recovered: {currencyFormatter(item.deltaRecovered || 0)}
+          </Text>
+        </View>
+        <Text style={Styles.report}>
+          Total {currencyFormatter(item.totalConfirmed)} confirmed cases and{' '}
+          {currencyFormatter(item.totalRecovered || 0)} recovered cases around
+          the world
+        </Text>
+      </View>
+    );
+  };
+
+  const renderDailyCaseLists = () => {
+    return (
+      <FlatList
+        data={dailyData}
+        keyExtractor={(_, i) => i.toString()}
+        renderItem={renderDailyCase}
+      />
+    );
+  };
+
   return (
     <View style={Styles.container}>
       {renderTitle()}
       {renderDataChart()}
-      {renderDailyCases()}
+      {renderDailyCaseLists()}
     </View>
   );
 };
