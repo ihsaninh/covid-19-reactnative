@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Linking, FlatList } from 'react-native';
+import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
 import { Styles } from './Home.style';
@@ -107,11 +107,7 @@ const HomeScreen = ({ navigation }) => {
         </Text>
         <Text style={Styles.infoSource}>
           Source data:{' '}
-          <Text
-            style={Styles.link}
-            onPress={() => Linking.openURL('https://covid19.mathdro.id/api')}>
-            https://covid19.mathdro.id/api
-          </Text>
+          <Text style={Styles.link}>https://covid19.mathdro.id/api</Text>
         </Text>
       </View>
     );
