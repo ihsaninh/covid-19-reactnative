@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
-import { formatDate, currencyFormatter } from '../utils/helper';
-import { mapStyle } from '../../mapStyle';
+import { Styles } from './Maps.style';
+import { mapStyle } from '../../../mapStyle';
+import { formatDate, currencyFormatter } from '../../utils/helper';
 
 const MapsScreens = () => {
   const refRBSheet = React.useRef();
@@ -32,7 +33,7 @@ const MapsScreens = () => {
     setDetail(item);
     setTimeout(() => {
       refRBSheet.current.open();
-    }, 200);
+    }, 300);
   };
 
   const renderBottomSheet = () => {
@@ -51,33 +52,33 @@ const MapsScreens = () => {
             backgroundColor: 'grey',
           },
         }}>
-        <View style={styles.countryDetail}>
-          <Text style={styles.countryName}>{`${
+        <View style={Styles.countryDetail}>
+          <Text style={Styles.countryName}>{`${
             detail.provinceState ? detail.provinceState + ' ' : ''
           }${detail.countryRegion}`}</Text>
           <Text
             style={[
-              styles.countryInfo,
-              styles.confirmed,
+              Styles.countryInfo,
+              Styles.confirmed,
             ]}>{`Confirmed: ${currencyFormatter(detail.confirmed)}`}</Text>
           <Text
             style={[
-              styles.countryInfo,
-              styles.deaths,
+              Styles.countryInfo,
+              Styles.deaths,
             ]}>{`Deaths: ${currencyFormatter(detail.deaths)}`}</Text>
           <Text
             style={[
-              styles.countryInfo,
-              styles.recovered,
+              Styles.countryInfo,
+              Styles.recovered,
             ]}>{`Recovered: ${currencyFormatter(detail.recovered)}`}</Text>
           <Text
             style={[
-              styles.countryInfo,
-              styles.existing,
+              Styles.countryInfo,
+              Styles.existing,
             ]}>{`Existing: ${currencyFormatter(
             detail.confirmed - detail.recovered - detail.deaths,
           )}`}</Text>
-          <Text style={styles.lastUpdate}>
+          <Text style={Styles.lastUpdate}>
             Last Updated: {formatDate(detail.lastUpdate)}
           </Text>
         </View>
@@ -89,7 +90,7 @@ const MapsScreens = () => {
     <View>
       <MapView
         provider={PROVIDER_GOOGLE}
-        style={[styles.map, { marginBottom }]}
+        style={[Styles.map, { marginBottom }]}
         initialRegion={{
           latitude: 30.5683366,
           longitude: 114.1602995,
@@ -107,8 +108,8 @@ const MapsScreens = () => {
             coordinate={{ latitude: item.lat, longitude: item.long }}
             onPress={openBottomSheet(item)}>
             <Image
-              source={require('../../assets/marker.png')}
-              style={styles.markerIcon}
+              source={require('../../../assets/marker.png')}
+              style={Styles.markerIcon}
             />
           </Marker>
         ))}
@@ -117,50 +118,5 @@ const MapsScreens = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-  countryName: {
-    color: '#bdc3c7',
-    fontSize: 18,
-    paddingBottom: 10,
-    fontFamily: 'GoogleSans-Bold',
-  },
-  countryInfo: {
-    fontWeight: '700',
-    paddingBottom: 10,
-  },
-  lastUpdate: {
-    color: '#A8A8A8',
-    fontFamily: 'GoogleSans-Regular',
-  },
-  countryDetail: {
-    marginHorizontal: 30,
-    marginVertical: 10,
-  },
-  confirmed: {
-    color: 'gold',
-    fontFamily: 'GoogleSans-Medium',
-  },
-  deaths: {
-    color: 'red',
-    fontFamily: 'GoogleSans-Medium',
-  },
-  recovered: {
-    color: 'lightgreen',
-    fontFamily: 'GoogleSans-Medium',
-  },
-  existing: {
-    color: 'orange',
-    fontFamily: 'GoogleSans-Medium',
-  },
-  markerIcon: {
-    height: 20,
-    width: 20,
-  },
-});
 
 export default MapsScreens;
