@@ -73,26 +73,32 @@ const HomeScreen = ({ navigation }) => {
           />
           <View style={Styles.info}>
             <View style={Styles.sections}>
-              <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                {currencyFormatter(data[0])}
-              </Text>
-              <Text style={[Styles.confirmed, Styles.fontStyle]}>
-                Confirmed
-              </Text>
+              <TouchableOpacity onPress={goToMaps}>
+                <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                  {currencyFormatter(data[0])}
+                </Text>
+                <Text style={[Styles.confirmed, Styles.fontStyle]}>
+                  Confirmed
+                </Text>
+              </TouchableOpacity>
             </View>
             <View style={Styles.sections}>
-              <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                {currencyFormatter(data[1])}
-              </Text>
-              <Text style={[Styles.recovered, Styles.fontStyle]}>
-                Recovered
-              </Text>
+              <TouchableOpacity onPress={goToMaps}>
+                <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                  {currencyFormatter(data[1])}
+                </Text>
+                <Text style={[Styles.recovered, Styles.fontStyle]}>
+                  Recovered
+                </Text>
+              </TouchableOpacity>
             </View>
             <View style={Styles.sections}>
-              <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                {currencyFormatter(data[2])}
-              </Text>
-              <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
+              <TouchableOpacity onPress={goToMaps}>
+                <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                  {currencyFormatter(data[2])}
+                </Text>
+                <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
