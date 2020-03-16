@@ -7,6 +7,7 @@ import {
   FlatList,
   ScrollView,
   RefreshControl,
+  TouchableNativeFeedback,
 } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
@@ -75,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
     );
   };
   const renderDataChart = () => {
-    const chart_wh = 190;
+    const chart_wh = 185;
     const series = data;
     const sliceColor = ['#E7B002', '#01C292', '#e74c3c'];
     return (
@@ -143,25 +144,29 @@ const HomeScreen = ({ navigation }) => {
 
   const renderDailyCase = ({ item }) => {
     return (
-      <View style={Styles.card2}>
-        <Text style={[Styles.textWhite, Styles.infoDate]}>
-          {formatOnlyDate(item.reportDate)}
-        </Text>
-        <View
-          style={[Styles.flexRow, Styles.spaceBetween, Styles.dataContainer]}>
-          <Text style={[Styles.confirmed, Styles.dataCount]}>
-            Confirmed: {currencyFormatter(item.deltaConfirmed)}
+      <TouchableNativeFeedback
+        background={TouchableNativeFeedback.SelectableBackground()}
+        onPress={() => null}>
+        <View style={Styles.card2}>
+          <Text style={[Styles.textWhite, Styles.infoDate]}>
+            {formatOnlyDate(item.reportDate)}
           </Text>
-          <Text style={[Styles.recovered, Styles.dataCount]}>
-            Recovered: {currencyFormatter(item.deltaRecovered || 0)}
+          <View
+            style={[Styles.flexRow, Styles.spaceBetween, Styles.dataContainer]}>
+            <Text style={[Styles.confirmed, Styles.dataCount]}>
+              Confirmed: {currencyFormatter(item.deltaConfirmed)}
+            </Text>
+            <Text style={[Styles.recovered, Styles.dataCount]}>
+              Recovered: {currencyFormatter(item.deltaRecovered || 0)}
+            </Text>
+          </View>
+          <Text style={Styles.report}>
+            Total {currencyFormatter(item.totalConfirmed)} confirmed cases and{' '}
+            {currencyFormatter(item.totalRecovered || 0)} recovered cases around
+            the world
           </Text>
         </View>
-        <Text style={Styles.report}>
-          Total {currencyFormatter(item.totalConfirmed)} confirmed cases and{' '}
-          {currencyFormatter(item.totalRecovered || 0)} recovered cases around
-          the world
-        </Text>
-      </View>
+      </TouchableNativeFeedback>
     );
   };
 

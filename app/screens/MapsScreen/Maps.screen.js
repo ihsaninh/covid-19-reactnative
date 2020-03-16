@@ -41,12 +41,12 @@ const MapsScreens = () => {
         initialRegion={{
           latitude: 30.5683366,
           longitude: 114.1602995,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.015,
+          latitudeDelta: 0.9,
+          longitudeDelta: 0.9,
         }}
         customMapStyle={mapStyle}
         showsCompass={false}
-        maxZoomLevel={4.9}>
+        maxZoomLevel={5}>
         {data.map((item, idx) => (
           <Marker
             key={idx}

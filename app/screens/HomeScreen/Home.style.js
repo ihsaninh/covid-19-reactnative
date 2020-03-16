@@ -24,7 +24,6 @@ const Styles = StyleSheet.create({
     fontFamily: 'GoogleSans-Bold',
   },
   card: {
-    marginTop: 10,
     marginHorizontal: 10,
     borderRadius: 20,
     padding: 20,
@@ -44,7 +43,7 @@ const Styles = StyleSheet.create({
     marginLeft: 20,
   },
   infoData: {
-    paddingTop: 30,
+    paddingTop: 20,
     color: '#adadad',
     fontFamily: 'GoogleSans-Medium',
   },
@@ -60,7 +59,8 @@ const Styles = StyleSheet.create({
     paddingBottom: 15,
   },
   fontStyle: {
-    fontSize: 16,
+    fontSize: 15,
+    paddingTop: 5,
     fontFamily: 'GoogleSans-Medium',
   },
   textWhite: {
