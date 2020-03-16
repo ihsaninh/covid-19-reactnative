@@ -9,7 +9,6 @@ import { formatDate, currencyFormatter } from '../../utils/helper';
 
 const MapsScreens = () => {
   const refRBSheet = React.useRef();
-  const [marginBottom, setMarginBottom] = React.useState(1);
   const [data, setData] = React.useState([]);
   const [detail, setDetail] = React.useState([]);
 
@@ -27,13 +26,41 @@ const MapsScreens = () => {
     }
   };
 
-  const onMapReady = () => setMarginBottom(0);
-
   const openBottomSheet = item => () => {
     setDetail(item);
     setTimeout(() => {
       refRBSheet.current.open();
     }, 300);
+  };
+
+  const renderMaps = () => {
+    return (
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={[Styles.map]}
+        initialRegion={{
+          latitude: 30.5683366,
+          longitude: 114.1602995,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.015,
+        }}
+        customMapStyle={mapStyle}
+        showsCompass={false}
+        maxZoomLevel={4.9}>
+        {data.map((item, idx) => (
+          <Marker
+            key={idx}
+            tracksViewChanges={false}
+            coordinate={{ latitude: item.lat, longitude: item.long }}
+            onPress={openBottomSheet(item)}>
+            <Image
+              source={require('../../../assets/marker.png')}
+              style={Styles.markerIcon}
+            />
+          </Marker>
+        ))}
+      </MapView>
+    );
   };
 
   const renderBottomSheet = () => {
@@ -75,9 +102,7 @@ const MapsScreens = () => {
             style={[
               Styles.countryInfo,
               Styles.existing,
-            ]}>{`Existing: ${currencyFormatter(
-            detail.confirmed - detail.recovered - detail.deaths,
-          )}`}</Text>
+            ]}>{`Existing: ${currencyFormatter(detail.active)}`}</Text>
           <Text style={Styles.lastUpdate}>
             Last Updated: {formatDate(detail.lastUpdate)}
           </Text>
@@ -88,32 +113,7 @@ const MapsScreens = () => {
 
   return (
     <View>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={[Styles.map, { marginBottom }]}
-        initialRegion={{
-          latitude: 30.5683366,
-          longitude: 114.1602995,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.015,
-        }}
-        customMapStyle={mapStyle}
-        onMapReady={onMapReady}
-        showsCompass={false}
-        maxZoomLevel={4.9}>
-        {data.map((item, idx) => (
-          <Marker
-            key={idx}
-            tracksViewChanges={false}
-            coordinate={{ latitude: item.lat, longitude: item.long }}
-            onPress={openBottomSheet(item)}>
-            <Image
-              source={require('../../../assets/marker.png')}
-              style={Styles.markerIcon}
-            />
-          </Marker>
-        ))}
-      </MapView>
+      {renderMaps()}
       {renderBottomSheet()}
     </View>
   );
