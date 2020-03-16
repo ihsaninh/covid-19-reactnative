@@ -1,5 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { Text, View, TouchableOpacity, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
 import { Styles } from './Home.style';
@@ -12,16 +20,17 @@ import {
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
   const [dailyData, setDailyData] = React.useState([]);
   const [lastUpdate, setLastUpdate] = React.useState('');
 
   React.useEffect(() => {
-    getData();
-    getDataDailyCases();
+    getAllData();
   }, []);
 
   const getData = async () => {
     try {
+      setLoading(true);
       const response = await fetch('https://covid19.mathdro.id/api');
       const result = await response.json();
       const confirmed = result.confirmed.value;
@@ -30,17 +39,26 @@ const HomeScreen = ({ navigation }) => {
       const arrayData = [confirmed, recovered, deaths];
       setData(arrayData);
       setLastUpdate(result.lastUpdate);
+      setLoading(false);
     } catch (error) {
       // error handler
     }
   };
 
+  const getAllData = async () => {
+    return Promise.all([getData(), getDataDailyCases()]);
+  };
+
   const getDataDailyCases = async () => {
     try {
+      setLoading(true);
       const response = await fetch('https://covid19.mathdro.id/api/daily');
       const result = await response.json();
       setDailyData(result.sort(compare));
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      // error handler
+    }
   };
 
   const goToMaps = () => {
@@ -62,53 +80,63 @@ const HomeScreen = ({ navigation }) => {
     const sliceColor = ['#E7B002', '#01C292', '#e74c3c'];
     return (
       <View style={Styles.card}>
-        <View style={Styles.flexRow}>
-          <PieChart
-            chart_wh={chart_wh}
-            series={series}
-            sliceColor={sliceColor}
-            doughnut={true}
-            coverRadius={0.65}
-            coverFill={'#1B232E'}
-          />
-          <View style={Styles.info}>
-            <View style={Styles.sections}>
-              <TouchableOpacity onPress={goToMaps}>
-                <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                  {currencyFormatter(data[0])}
-                </Text>
-                <Text style={[Styles.confirmed, Styles.fontStyle]}>
-                  Confirmed
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={Styles.sections}>
-              <TouchableOpacity onPress={goToMaps}>
-                <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                  {currencyFormatter(data[1])}
-                </Text>
-                <Text style={[Styles.recovered, Styles.fontStyle]}>
-                  Recovered
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={Styles.sections}>
-              <TouchableOpacity onPress={goToMaps}>
-                <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                  {currencyFormatter(data[2])}
-                </Text>
-                <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
-              </TouchableOpacity>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={loading}
+              onRefresh={getAllData}
+              colors={['#01C292']}
+              progressBackgroundColor="#1B232E"
+            />
+          }>
+          <View style={Styles.flexRow}>
+            <PieChart
+              chart_wh={chart_wh}
+              series={series}
+              sliceColor={sliceColor}
+              doughnut={true}
+              coverRadius={0.65}
+              coverFill={'#1B232E'}
+            />
+            <View style={Styles.info}>
+              <View style={Styles.sections}>
+                <TouchableOpacity onPress={goToMaps}>
+                  <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                    {currencyFormatter(data[0])}
+                  </Text>
+                  <Text style={[Styles.confirmed, Styles.fontStyle]}>
+                    Confirmed
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={Styles.sections}>
+                <TouchableOpacity onPress={goToMaps}>
+                  <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                    {currencyFormatter(data[1])}
+                  </Text>
+                  <Text style={[Styles.recovered, Styles.fontStyle]}>
+                    Recovered
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={Styles.sections}>
+                <TouchableOpacity onPress={goToMaps}>
+                  <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                    {currencyFormatter(data[2])}
+                  </Text>
+                  <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-        <Text style={Styles.infoData}>
-          Last Updated: {formatDate(lastUpdate)}
-        </Text>
-        <Text style={Styles.infoSource}>
-          Source data:{' '}
-          <Text style={Styles.link}>https://covid19.mathdro.id/api</Text>
-        </Text>
+          <Text style={Styles.infoData}>
+            Last Updated: {formatDate(lastUpdate)}
+          </Text>
+          <Text style={Styles.infoSource}>
+            Source data:{' '}
+            <Text style={Styles.link}>https://covid19.mathdro.id/</Text>
+          </Text>
+        </ScrollView>
       </View>
     );
   };
@@ -143,6 +171,8 @@ const HomeScreen = ({ navigation }) => {
         data={dailyData}
         keyExtractor={(_, i) => i.toString()}
         renderItem={renderDailyCase}
+        showsVerticalScrollIndicator={false}
+        overScrollMode="never"
       />
     );
   };
