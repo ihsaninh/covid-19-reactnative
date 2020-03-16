@@ -117,16 +117,6 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
-  const renderGoToMaps = () => {
-    return (
-      <View style={Styles.card2}>
-        <TouchableOpacity onPress={goToMaps}>
-          <Text style={[Styles.textGrey, Styles.fontStyle]}>View on Maps</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
   const renderDailyCase = ({ item }) => {
     return (
       <View style={Styles.card2}>
