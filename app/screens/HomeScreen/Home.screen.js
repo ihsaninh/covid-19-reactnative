@@ -103,7 +103,7 @@ const HomeScreen = ({ navigation }) => {
               <View style={Styles.sections}>
                 <TouchableOpacity onPress={goToMaps}>
                   <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                    {currencyFormatter(data[0])}
+                    {currencyFormatter(data[0] || 0)}
                   </Text>
                   <Text style={[Styles.confirmed, Styles.fontStyle]}>
                     Confirmed
@@ -113,7 +113,7 @@ const HomeScreen = ({ navigation }) => {
               <View style={Styles.sections}>
                 <TouchableOpacity onPress={goToMaps}>
                   <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                    {currencyFormatter(data[1])}
+                    {currencyFormatter(data[1] || 0)}
                   </Text>
                   <Text style={[Styles.recovered, Styles.fontStyle]}>
                     Recovered
@@ -123,7 +123,7 @@ const HomeScreen = ({ navigation }) => {
               <View style={Styles.sections}>
                 <TouchableOpacity onPress={goToMaps}>
                   <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                    {currencyFormatter(data[2])}
+                    {currencyFormatter(data[2] || 0)}
                   </Text>
                   <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
                 </TouchableOpacity>

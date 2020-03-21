@@ -1,5 +1,5 @@
 const formatDate = timestamp => {
-  const date = new Date(timestamp);
+  const date = new Date(timestamp || 0);
   const month = date.getMonth();
   const getDate = date.getDate();
   const getYears = date.getFullYear();

@@ -8,13 +8,29 @@ import { mapStyle } from '../../../mapStyle';
 import { formatDate, currencyFormatter } from '../../utils/helper';
 
 const MapsScreens = () => {
+  const mapView = React.useRef();
   const refRBSheet = React.useRef();
   const [data, setData] = React.useState([]);
   const [detail, setDetail] = React.useState([]);
 
   React.useEffect(() => {
     getMarker();
+    getAnimateMaps();
   }, []);
+
+  const getAnimateMaps = () => {
+    setTimeout(() => {
+      mapView.current.animateToRegion(
+        {
+          latitude: 30.5683366,
+          longitude: 114.1602995,
+          latitudeDelta: 0.9,
+          longitudeDelta: 0.9,
+        },
+        1500,
+      );
+    }, 300);
+  };
 
   const getMarker = async () => {
     try {
@@ -36,13 +52,14 @@ const MapsScreens = () => {
   const renderMaps = () => {
     return (
       <MapView
+        ref={mapView}
         provider={PROVIDER_GOOGLE}
         style={[Styles.map]}
         initialRegion={{
-          latitude: 30.5683366,
-          longitude: 114.1602995,
-          latitudeDelta: 0.9,
-          longitudeDelta: 0.9,
+          latitude: 8.6122307,
+          longitude: 15.6631778,
+          latitudeDelta: 50,
+          longitudeDelta: 50,
         }}
         customMapStyle={mapStyle}
         showsCompass={false}

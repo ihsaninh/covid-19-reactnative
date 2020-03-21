@@ -13,7 +13,7 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      screenOptions={{ ...TransitionPresets.ModalSlideFromBottomIOS }}>
+      screenOptions={{ ...TransitionPresets.DefaultTransition }}>
       <Stack.Screen
         name="Home"
         component={HomeScreen}

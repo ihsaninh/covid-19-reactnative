@@ -28,9 +28,10 @@ const Styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     backgroundColor: '#1B232E',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   card2: {
+    // marginHorizontal: 10,
     marginTop: 5,
     padding: 20,
     paddingLeft: 25,
