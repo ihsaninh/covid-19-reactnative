@@ -10,6 +10,7 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import PieChart from 'react-native-pie-chart';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { Styles } from './Home.style';
 import {
@@ -76,7 +77,7 @@ const HomeScreen = ({ navigation }) => {
     );
   };
   const renderDataChart = () => {
-    const chart_wh = 185;
+    const chart_wh = 175;
     const series = data;
     const sliceColor = ['#E7B002', '#01C292', '#e74c3c'];
     return (
@@ -97,36 +98,30 @@ const HomeScreen = ({ navigation }) => {
               sliceColor={sliceColor}
               doughnut={true}
               coverRadius={0.65}
-              coverFill={'#1B232E'}
+              coverFill={'#171B1E'}
             />
             <View style={Styles.info}>
               <View style={Styles.sections}>
-                <TouchableOpacity onPress={goToMaps}>
-                  <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                    {currencyFormatter(data[0] || 0)}
-                  </Text>
-                  <Text style={[Styles.confirmed, Styles.fontStyle]}>
-                    Confirmed
-                  </Text>
-                </TouchableOpacity>
+                <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                  {currencyFormatter(data[0] || 0)}
+                </Text>
+                <Text style={[Styles.confirmed, Styles.fontStyle]}>
+                  Confirmed
+                </Text>
               </View>
               <View style={Styles.sections}>
-                <TouchableOpacity onPress={goToMaps}>
-                  <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                    {currencyFormatter(data[1] || 0)}
-                  </Text>
-                  <Text style={[Styles.recovered, Styles.fontStyle]}>
-                    Recovered
-                  </Text>
-                </TouchableOpacity>
+                <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                  {currencyFormatter(data[1] || 0)}
+                </Text>
+                <Text style={[Styles.recovered, Styles.fontStyle]}>
+                  Recovered
+                </Text>
               </View>
               <View style={Styles.sections}>
-                <TouchableOpacity onPress={goToMaps}>
-                  <Text style={[Styles.textWhite, Styles.fontStyle]}>
-                    {currencyFormatter(data[2] || 0)}
-                  </Text>
-                  <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
-                </TouchableOpacity>
+                <Text style={[Styles.textWhite, Styles.fontStyle]}>
+                  {currencyFormatter(data[2] || 0)}
+                </Text>
+                <Text style={[Styles.deaths, Styles.fontStyle]}>Deaths</Text>
               </View>
             </View>
           </View>
@@ -139,6 +134,28 @@ const HomeScreen = ({ navigation }) => {
           </Text>
         </ScrollView>
       </View>
+    );
+  };
+
+  const renderSeparator = () => {
+    return <View style={Styles.separator} />;
+  };
+
+  const renderDescription = () => {
+    return (
+      <TouchableNativeFeedback
+        onPress={goToMaps}
+        background={TouchableNativeFeedback.SelectableBackground()}>
+        <View style={Styles.toMapsContainer}>
+          <View>
+            <Text style={Styles.toMapsTitle}>Show Detail Cases</Text>
+            <Text style={Styles.toMapsSubTitle}>
+              Click to show detail cases on the maps
+            </Text>
+          </View>
+          <Icon name="chevron-right" size={30} color="#adadad" />
+        </View>
+      </TouchableNativeFeedback>
     );
   };
 
@@ -170,14 +187,22 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
+  const renderTitleDailtCase = () => {
+    return (
+      <View style={Styles.titleDailyCases}>
+        <Text style={Styles.titleDailyCasesText}>Daily Updates</Text>
+      </View>
+    );
+  };
+
   const renderDailyCaseLists = () => {
     return (
       <FlatList
         data={dailyData}
         keyExtractor={(_, i) => i.toString()}
         renderItem={renderDailyCase}
-        showsVerticalScrollIndicator={false}
         overScrollMode="never"
+        ListHeaderComponent={renderTitleDailtCase}
       />
     );
   };
@@ -186,6 +211,8 @@ const HomeScreen = ({ navigation }) => {
     <View style={Styles.container}>
       {renderTitle()}
       {renderDataChart()}
+      {renderDescription()}
+      {renderSeparator()}
       {renderDailyCaseLists()}
     </View>
   );

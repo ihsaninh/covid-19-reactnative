@@ -1,11 +1,10 @@
-import { StyleSheet } from 'react-native';
-import ExtraDimensions from 'react-native-extra-dimensions-android';
+import { StyleSheet, StatusBar } from 'react-native';
 
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#171B1E',
-    paddingTop: ExtraDimensions.get('STATUS_BAR_HEIGHT'),
+    paddingTop: StatusBar.currentHeight,
   },
   flexRow: {
     flexDirection: 'row',
@@ -25,18 +24,16 @@ const Styles = StyleSheet.create({
   },
   card: {
     marginHorizontal: 10,
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 20,
-    backgroundColor: '#1B232E',
-    marginBottom: 5,
   },
   card2: {
-    // marginHorizontal: 10,
+    marginHorizontal: 10,
     marginTop: 5,
     padding: 20,
-    paddingLeft: 25,
-    backgroundColor: '#1B232E',
-    borderRadius: 10,
+    paddingVertical: 15,
+    paddingLeft: 20,
+    borderRadius: 5,
   },
   info: {
     flexDirection: 'column',
@@ -46,10 +43,10 @@ const Styles = StyleSheet.create({
   infoData: {
     paddingTop: 20,
     color: '#adadad',
-    fontFamily: 'GoogleSans-Medium',
+    fontFamily: 'GoogleSans-Regular',
   },
   infoSource: {
-    paddingTop: 10,
+    paddingTop: 8,
     color: '#adadad',
     fontFamily: 'GoogleSans-Regular',
   },
@@ -88,7 +85,7 @@ const Styles = StyleSheet.create({
   },
   dataContainer: {
     marginTop: 10,
-    width: '92%',
+    width: '95%',
   },
   dataCount: {
     fontSize: 14,
@@ -100,6 +97,37 @@ const Styles = StyleSheet.create({
     width: '95%',
     lineHeight: 20,
     fontFamily: 'GoogleSans-Regular',
+  },
+  toMapsContainer: {
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  toMapsTitle: {
+    fontFamily: 'GoogleSans-Medium',
+    color: '#fff',
+    fontSize: 17,
+  },
+  toMapsSubTitle: {
+    fontFamily: 'GoogleSans-Regular',
+    paddingTop: 5,
+    color: '#adadad',
+    fontSize: 13,
+  },
+  separator: {
+    marginHorizontal: 15,
+    height: 1,
+    backgroundColor: '#333',
+  },
+  titleDailyCases: {
+    marginHorizontal: 30,
+    marginTop: 20,
+  },
+  titleDailyCasesText: {
+    color: '#fff',
+    fontSize: 15,
+    fontFamily: 'GoogleSans-Medium',
   },
 });
 
